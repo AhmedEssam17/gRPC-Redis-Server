@@ -25,7 +25,7 @@ func main() {
 	}
 
 	grpcServer := grpc.NewServer()
-	todoService := NewTodoServiceServer("localhost:6379", funcLogs)
+	todoService := NewTodoServiceServer("redis-container:6379", funcLogs)
 
 	pb.RegisterTodoServiceServer(grpcServer, todoService)
 
