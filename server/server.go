@@ -19,12 +19,17 @@ func main() {
 		log.Fatalf("failed to listen: %v", err)
 	}
 
+	host, port, err := net.SplitHostPort(lis.Addr().String())
+	if err != nil {
+		log.Fatalf("failed to split address: %v", err)
+	}
+
 	grpcServer := grpc.NewServer()
 	todoService := NewTodoServiceServer("localhost:6379", funcLogs)
 
 	pb.RegisterTodoServiceServer(grpcServer, todoService)
 
-	fmt.Println("Running Server on Port 8888...")
+	fmt.Printf("Running Server on %s:%s...\n", host, port)
 
 	if err := grpcServer.Serve(lis); err != nil {
 		log.Fatalf("failed to serve: %v", err)
