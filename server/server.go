@@ -14,6 +14,8 @@ import (
 func main() {
 	funcLogs := hclog.Default()
 
+	fmt.Printf("...New Test...\n")
+
 	lis, err := net.Listen("tcp", ":8888")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
